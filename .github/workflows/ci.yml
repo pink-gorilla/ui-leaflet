@@ -28,15 +28,15 @@ jobs:
         cli: 1.10.3.882  # Clojure CLI based on tools.deps
         #lein: 2.9.1     # or use 'latest' to always provision latest version of leiningen
         #boot: 2.8.3     # or use 'latest' to always provision latest version of boot
+    - name: clj-fmt
+      if: ${{ matrix.os != 'windows-latest' }}
+      run: clojure -M:cljfmt
+      shell: bash
     - name: npm-install
       run: ./script/npm-install.sh
       shell: bash
     - name: copy-res
       run: ./script/copy_res.sh
-      shell: bash
-    - name: clj-fmt
-      if: ${{ matrix.os != 'windows-latest' }}
-      run: clojure -M:cljfmt
       shell: bash
     - name: show git tag
       run: clojure -M:garamond
