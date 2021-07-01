@@ -1,0 +1,4 @@
+{:group-id "org.pinkgorilla"
+ :artifact-id "ui-leaflet"
+ :scm-url "https://github.com/pink-gorilla/ui-leaflet/"
+ }
