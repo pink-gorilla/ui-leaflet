@@ -3,8 +3,8 @@
  :cljs-namespace [pinkgorilla.leaflet.goldly]
  :cljs-bindings {}
  :cljs-ns-bindings {}
- :theme {:available  {}
-         :current {}}
+ :theme {:available  {:leaflet {true ["leaflet/dist/leaflet.css"]}}
+         :current {:leaflet true}}
  :snippets [; leaflet
             {:type :pinkie
              :category :leaflet
