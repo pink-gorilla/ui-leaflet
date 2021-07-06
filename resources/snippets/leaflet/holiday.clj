@@ -1,7 +1,7 @@
 (require '[goldly.runner :refer [system-start!]])
 (require '[goldly.system :as goldly])
 
-(def places
+(goldly/def-ui places
   {:london {:center [51.49, -0.08]
             :zoom 12
             :height 600 :width 700
@@ -30,8 +30,7 @@
           [:p (str "map data: " (:map @state))]
           (when (:map @state)
             [:p/leaflet (:map @state)])]
-   :fns {}}
-  {:fns {:getdestination [(fn [place] (place places))
+   :fns-raw {:getdestination [(fn [place] (place places))
                           [:map]]
          :lucky [(fn [] (let [ks (into [] (keys places))
                               i (rand-int (count ks))

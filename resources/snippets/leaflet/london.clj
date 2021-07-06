@@ -38,11 +38,10 @@
  (goldly/system
   {:id :leaflet-london
    :state {}
-   :html [:p/leaflet ; leaflet-map
-          {:center [51.49, -0.08] 
+   :html [:p/leaflet 
+          {:box :lg
+           :center [51.49, -0.08] 
            :zoom 12 
-           :height 600 
-           :width 700
            :features [{:type :rectangle :bounds rectangle}
                       {:type :circle :center center :fillColor "blue" :radius 200}
                       {:type :polygon :positions polygon :color "purple"}
@@ -54,5 +53,5 @@
                       {:type :circlemarker :center [51.52, -0.06] :fillColor "blue" :radius 200 :popup "square the circle"}
                       {:type :geojson :data geojson}]}]
    :fns {}}
-  {:fns {}}))
+  ))
 

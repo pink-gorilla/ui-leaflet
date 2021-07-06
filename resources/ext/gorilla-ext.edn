@@ -1,27 +1,23 @@
 {:name "ui-leaflet"
  :clj-require []
- :cljs-namespace [pinkgorilla.leaflet.goldly]
- :cljs-bindings {}
- :cljs-ns-bindings {}
  :theme {:available  {:leaflet {true ["leaflet/dist/leaflet.css"]}}
-         :current {:leaflet true}}
+         :current    {:leaflet true}}
+ :cljs-namespace [pinkgorilla.leaflet.leaflet]
+ :cljs-bindings {'leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
+ :cljs-ns-bindings {}
+ :pinkie {:p/leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
  :snippets [; leaflet
             {:type :pinkie
              :category :leaflet
              :id :leaflet-simpel
-             :filename "snippets/leaflet/leaflet_simpel.edn"}
+             :filename "snippets/leaflet/simpel.edn"}
             {:type  :goldly-clj
              :category :leaflet
              :id :leaflet-london
-             :filename "snippets/leaflet/leaflet_london.clj"}
-            {:type  :goldly-clj
-             :category :leaflet
-             :id :leaflet-iss-realtime
-             :filename "snippets/leaflet/leaflet_iss_realtime.clj"}
+             :filename "snippets/leaflet/london.clj"}
             {:type :goldly-clj
              :category :leaflet
              :id :leaflet-holiday
              :filename "snippets/leaflet/holiday.clj"}]
- ; modules and pinkie not yet via loader
- :pinkie {}
+ ; modules not yet via loader
  :modules {}}

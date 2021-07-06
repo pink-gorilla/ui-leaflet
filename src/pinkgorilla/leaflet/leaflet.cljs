@@ -3,6 +3,7 @@
    [reagent.core :as r]
    ["react-leaflet" :refer [MapContainer TileLayer Popup Marker CircleMarker Circle Rectangle Polygon Polyline GeoJSON]]
    ["leaflet" :refer [Icon]]
+   [pinkie.box :refer [container-style apply-style]]
    [pinkgorilla.dsl.leaflet :refer [default-options]]))
 
 (defn res-href [href]
@@ -112,16 +113,13 @@
   (let [props (r/atom (select-keys spec [:width :height :zoom :center]))]
     (fn [spec]
       (let [{:keys [css tile-layer-url attribution]} config ; config cannot be set by user
-            {:keys [width height zoom center features]
-             :or {width 600
-                  height 400
-                  zoom 10
+            {:keys [zoom center features]
+             :or {zoom 10
                   center [8.5407166 -79.8833319]
                   features []}} spec
             current-props (select-keys spec [:width :height :zoom :center])
             container-props {:zoom zoom
                              :center center
-                             :style {:width width :height height}
                              :keyboard true ; navigate map with arrows and +-
                              :scrollWheelZoom false
                              :dragging false
@@ -141,8 +139,9 @@
 
         (if (= current-props @props)
           [:div.z-10
-           (println "map: " container-props)
-           [:> MapContainer container-props
+           ;(println "map: " container-props)
+           [:> MapContainer (-> (apply-style spec)
+                                (merge container-props))
             [:> TileLayer
              {:url tile-layer-url
               :attribution attribution}]
