@@ -6,6 +6,7 @@
  :cljs-bindings {'leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
  :cljs-ns-bindings {}
  :pinkie {:p/leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
+ :lazy true
  :snippets [; leaflet
             {:type :pinkie
              :category :leaflet
@@ -18,6 +19,4 @@
             {:type :goldly-clj
              :category :leaflet
              :id :leaflet-holiday
-             :filename "snippets/leaflet/holiday.clj"}]
- ; modules not yet via loader
- :modules {}}
+             :filename "snippets/leaflet/holiday.clj"}]}
