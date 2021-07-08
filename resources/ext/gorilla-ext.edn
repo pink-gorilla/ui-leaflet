@@ -6,7 +6,7 @@
  :cljs-bindings {'leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
  :cljs-ns-bindings {}
  :pinkie {:p/leaflet pinkgorilla.leaflet.leaflet/leaflet-map}
- :lazy true
+ :lazy false
  :snippets [; leaflet
             {:type :pinkie
              :category :leaflet
