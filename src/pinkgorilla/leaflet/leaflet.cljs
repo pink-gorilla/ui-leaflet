@@ -151,5 +151,7 @@
           (do (reset! props current-props) ; https://react-leaflet.js.org/docs/api-components a containe is immuteable
               [:div "loading"]))))))
 
+(defn leaflet-map2 [spec]
+  [leaflet-map spec])
 
 

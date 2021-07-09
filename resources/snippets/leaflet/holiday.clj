@@ -1,6 +1,8 @@
 (require '[goldly.runner :refer [system-start!]])
 (require '[goldly.system :as goldly])
 
+;; snippet is broken. wait till move to pure cljs is done.
+
 (goldly/def-ui places
   {:london {:center [51.49, -0.08]
             :zoom 12
