@@ -8,7 +8,7 @@ clojure -X:docs-run
 ```
 
 Navigate your webbrowser to port 8080. 
-Snippets are in `running systems` / `snippet-registry`
+
 
 
 
