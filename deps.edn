@@ -1,5 +1,5 @@
 {:paths ["src"
-         "resources" ; snippets
+         "resources" ; ext
          "target/node_modules" ; css png resources from npm modules
          ]
  :deps
@@ -47,12 +47,36 @@
   ;; app
 
   :goldly
-  {:extra-deps {org.pinkgorilla/ui-input {:mvn/version "0.0.10"}
-                org.pinkgorilla/goldly {:mvn/version "0.3.11"
-                                        :exclusions  [org.pinkgorilla/ui-math]}}
-   :exec-fn goldly-server.app/goldly-server-run!
-   :exec-args {:profile "watch2"
-               :config {:goldly {:lazy true}}}}
+  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.4.519"
+                                        :exclusions [org.pinkgorilla/ui-leaflet]}}
+   :jvm-opts ["-Dmaven.wagon.rto=90000"]
+   :exec-fn goldly.app.build/goldly-build
+   :exec-args {:profile "compile2"
+               :config ["webly/config.edn" "goldly/config.edn"]}}
+
+
+; RUN SERVICES (keep running)
+  :docs-run
+  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.519"
+                                             :exclusions [org.pinkgorilla/ui-leaflet]}}
+   :extra-paths ["demo"]
+   :jvm-opts ["-Dmaven.wagon.rto=90000"]
+   :exec-fn modular.system/start!
+   :exec-args {:profile "jetty"
+               :config ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"
+                        "demo/demo-config.edn"]
+               :services "goldly/docs-services.edn"}}
+
+  ; BUILD BUNDLE (then exit)
+  :docs-build
+  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.519"
+                                             :exclusions [org.pinkgorilla/ui-leaflet]}}
+   :jvm-opts ["-Dmaven.wagon.rto=90000"]
+   :exec-fn goldly.app.build/goldly-build
+   :exec-args {:profile "compile2"
+               :config ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
+
+
 
 ;
   }}
