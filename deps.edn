@@ -45,16 +45,18 @@
          :exec-fn cognitect.test-runner.api/test}
 
 ; RUN SERVICES (keep running)
-  :docs
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.546"
-                                             :exclusions [org.pinkgorilla/ui-leaflet]}}
+  :goldly
+  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.550"}
+                org.pinkgorilla/ui-repl {:mvn/version "0.0.53"} ; reagent, format, page-nav,...
+                org.pinkgorilla/ui-input {:mvn/version "0.0.21"} ; select, button
+                }
    :extra-paths ["demo"]
    :jvm-opts ["-Dmaven.wagon.rto=90000"]
    :exec-fn modular.system/start!
    :exec-args {:profile "jetty"
-               :config ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"
+               :config ["webly/config.edn" "goldly/config.edn"
                         "demo/demo-config.edn"]
-               :services "goldly/docs-services.edn"}}
+               :services "goldly/services.edn"}}
 
   ; BUILD BUNDLE (then exit)
   :build
