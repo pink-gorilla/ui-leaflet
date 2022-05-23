@@ -3,7 +3,7 @@
 ## Demo
 
 ```
-clojure -X:docs-run
+clojure -X:docs
 ```
 
 Navigate your webbrowser to port 8080. 

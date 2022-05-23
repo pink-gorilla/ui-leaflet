@@ -1,3 +1,8 @@
+(ns demo.notebook.leaflet-holiday
+  (:require
+   [reagent.core :as r]
+   [input :refer [button select]]
+   [ui.leaflet :refer [leaflet]]))
 
 (def places
   {:london {:center [51.49, -0.08]
@@ -13,7 +18,7 @@
             :zoom 12
             :height 600 :width 700}})
 
-(def holiday-state
+(defonce holiday-state
   (r/atom {:place nil
            :map nil}))
 
@@ -26,14 +31,18 @@
         place (get ks i)]
     (swap! holiday-state assoc :map (place places))))
 
+(defn holiday []
+  [:div
+   [:div {:class "flex flex-row content-between"}
+    [select
+     {:items [:london :panama :vienna]
+      :on-change getdestination}
+     holiday-state [:place]]
+    [button {:on-click lucky} "Feeling Lucky!"]]
+   [:p (str "map data: " (:map @holiday-state))]
+   (when (:map @holiday-state)
+     [leaflet (:map @holiday-state)])])
+
 ^:R
-[:div
- [:div {:class "flex flex-row content-between"}
-  ['user/select
-   {:items [:london :panama :vienna]
-    :on-change getdestination}
-   holiday-state [:place]]
-  [:p/button {:on-click lucky} "Feeling Lucky!"]]
- [:p (str "map data: " (:map @holiday-state))]
- (when (:map @holiday-state)
-   ['user/leaflet (:map @holiday-state)])]
+[holiday]
+

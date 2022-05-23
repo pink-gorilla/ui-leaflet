@@ -1,10 +1,10 @@
-(ns pinkgorilla.leaflet.leaflet
+(ns ui.leaflet
   (:require
    [reagent.core :as r]
    ["react-leaflet" :refer [MapContainer TileLayer Popup Marker CircleMarker Circle Rectangle Polygon Polyline GeoJSON]]
    ["leaflet" :refer [Icon]]
    [pinkie.box :refer [container-style apply-style]]
-   [pinkgorilla.dsl.leaflet :refer [default-options]]))
+   [ui.leaflet.dsl :refer [default-options]]))
 
 (defn res-href [href]
   (str "/r/" href))

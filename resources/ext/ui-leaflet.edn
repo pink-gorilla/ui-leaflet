@@ -1,11 +1,8 @@
 {:name "ui-leaflet"
  ; build
  :lazy true
- :cljs-namespace [pinkgorilla.leaflet.leaflet]
- :cljs-bindings {'leaflet pinkgorilla.leaflet.leaflet/leaflet-map2}
- :cljs-ns-bindings {}
+ :cljs-namespace [ui.leaflet]
+ :cljs-ns-bindings {'ui.leaflet {'leaflet ui.leaflet/leaflet-map2}}
  ; theme
  :theme {:available  {:leaflet {true ["leaflet/dist/leaflet.css"]}}
-        :current    {:leaflet true}}
- ; run
- :clj-require []}
+         :current    {:leaflet true}}}

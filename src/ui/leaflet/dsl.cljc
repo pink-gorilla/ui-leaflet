@@ -1,4 +1,4 @@
-(ns pinkgorilla.dsl.leaflet
+(ns ui.leaflet.dsl
   "why dsl? 
    create functions/macros that allow to easily create renderable data structures
 

@@ -4,7 +4,7 @@
          ]
  :deps
  {org.clojure/clojure    {:mvn/version "1.10.3"}
-  org.pinkgorilla/pinkie {:mvn/version "0.3.11"} ; box
+  org.pinkgorilla/pinkie {:mvn/version "0.3.15"} ; box
   }
  :aliases
  {;https://github.com/applied-science/deps-library
@@ -44,20 +44,9 @@
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
 
-  ;; app
-
-  :goldly
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.4.519"
-                                        :exclusions [org.pinkgorilla/ui-leaflet]}}
-   :jvm-opts ["-Dmaven.wagon.rto=90000"]
-   :exec-fn goldly.app.build/goldly-build
-   :exec-args {:profile "compile2"
-               :config ["webly/config.edn" "goldly/config.edn"]}}
-
-
 ; RUN SERVICES (keep running)
-  :docs-run
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.519"
+  :docs
+  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.546"
                                              :exclusions [org.pinkgorilla/ui-leaflet]}}
    :extra-paths ["demo"]
    :jvm-opts ["-Dmaven.wagon.rto=90000"]
@@ -68,15 +57,9 @@
                :services "goldly/docs-services.edn"}}
 
   ; BUILD BUNDLE (then exit)
-  :docs-build
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.519"
-                                             :exclusions [org.pinkgorilla/ui-leaflet]}}
-   :jvm-opts ["-Dmaven.wagon.rto=90000"]
-   :exec-fn goldly.app.build/goldly-build
-   :exec-args {:profile "compile2"
-               :config ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
-
-
+  :build
+  {:exec-fn goldly.app.build/goldly-build
+   :exec-args {:profile "compile2"}}
 
 ;
   }}

@@ -1,7 +1,7 @@
 (ns pinkgorilla.leaflet-test
   (:require
    [clojure.test :refer [deftest is testing]]
-   [pinkgorilla.dsl.leaflet :as lg :refer [parse-args]]))
+   [ui.leaflet.dsl :as lg :refer [parse-args]]))
 
 #_(defmacro testable-privates [namespace & symbols]
     (let [defs (map (fn [s] `(def ~s (ns-resolve '~namespace '~s))) symbols)]
