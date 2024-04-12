@@ -36,14 +36,8 @@ jobs:
     - name: copy-res
       run: ./script/copy_res.sh
       shell: bash
-    - name: show git tag
-      run: clojure -M:garamond
-    #- name: clj-kondo
-    #  run: clojure -M:lint
     - name: test-clj
       run: clojure -M:test
-    #- name: cloverage
-    #  run: clojure -M:cloverage
     - name: Release
       if: success()
       # if: github.event_name == 'push'
@@ -54,12 +48,5 @@ jobs:
       run: |
         git config --global user.email "ci@pinkgorilla.org"
         git config --global user.name "CI/CD"
-        rm src/goldly_bindings_generated.cljs
-        clojure -M:release --patch
-        git push --tags
-      #  clojure -M:release tag --minor
-      #  clojure -M:release pom
-      #  clojure -M:release jar
-      # clojure -M:release deploy
-      # lein release
-      # bash <(curl -s https://codecov.io/bash)
+        clojure -T:build jar
+        clojure -T:build deploy

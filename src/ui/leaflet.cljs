@@ -3,7 +3,7 @@
    [reagent.core :as r]
    ["react-leaflet" :refer [MapContainer TileLayer Popup Marker CircleMarker Circle Rectangle Polygon Polyline GeoJSON]]
    ["leaflet" :refer [Icon]]
-   [pinkie.box :refer [container-style apply-style]]
+   [pinkie.ui.core :refer [apply-box-style]]
    [ui.leaflet.dsl :refer [default-options]]))
 
 (defn res-href [href]
@@ -91,8 +91,7 @@
 ;      latlng: e.latlng,
 ;    })
 
-(defn ^{:category :data}
-  leaflet-map
+(defn  leaflet-map
   "displays a map with leaflet.
    example:
   [:p/leaflet
@@ -140,7 +139,7 @@
         (if (= current-props @props)
           [:div.z-10
            ;(println "map: " container-props)
-           [:> MapContainer (-> (apply-style spec)
+           [:> MapContainer (-> (apply-box-style spec)
                                 (merge container-props))
             [:> TileLayer
              {:url tile-layer-url

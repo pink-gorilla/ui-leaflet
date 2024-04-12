@@ -1,8 +1,9 @@
 {:name "ui-leaflet"
  ; build
- :lazy-sci true
+ :lazy true
  :cljs-namespace [ui.leaflet]
- :cljs-ns-bindings {'ui.leaflet {'leaflet ui.leaflet/leaflet-map2}}
+ :cljs-ns-bindings {'ui.leaflet {'leaflet-map2 ui.leaflet/leaflet-map2
+                                 'leaflet-map ui.leaflet/leaflet-map}}
  ; theme
  :theme {:available  {:leaflet {true ["leaflet/dist/leaflet.css"]}}
          :current    {:leaflet true}}}

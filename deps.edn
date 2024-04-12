@@ -3,14 +3,14 @@
          "target/node_modules" ; css png resources from npm modules
          ]
  :deps
- {org.clojure/clojure    {:mvn/version "1.10.3"}
-  org.pinkgorilla/pinkie {:mvn/version "0.3.15"} ; box
-  }
+ {org.pinkgorilla/pinkie {:mvn/version "0.5.231"} ; box
+  org.clojure/clojure    {:mvn/version "1.10.3"}}
  :aliases
- {;https://github.com/applied-science/deps-library
-  :release
-  {:extra-deps {applied-science/deps-library {:mvn/version "0.4.0"}}
-   :main-opts ["-m" "applied-science.deps-library"]}
+ {; github ci
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
+                 slipset/deps-deploy {:mvn/version "0.2.1"}
+                 babashka/fs {:mvn/version "0.0.5"}}
+          :ns-default build}
 
   ; https://github.com/weavejester/cljfmt
   :cljfmt
@@ -25,18 +25,10 @@
   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
    :main-opts ["-m" "clj-kondo.main" "--lint" "src"]}
 
-  :outdated
-  {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "antq.core"]}
-
   :check
   {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
                                  :sha "0ca84df1357d71429243b99908303f45a934654c"}}
    :main-opts ["-m" "clj-check.check"]}
-
-  :garamond
-  {:main-opts ["-m" "garamond.main"]
-   :extra-deps {com.workframe/garamond {:mvn/version "0.4.0"}}}
 
   :test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
@@ -44,24 +36,26 @@
          :main-opts ["-m" "cognitect.test-runner"]
          :exec-fn cognitect.test-runner.api/test}
 
-; RUN SERVICES (keep running)
-  :goldly
-  {:extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.550"}
-                org.pinkgorilla/ui-repl {:mvn/version "0.0.53"} ; reagent, format, page-nav,...
-                org.pinkgorilla/ui-input {:mvn/version "0.0.21"} ; select, button
-                }
-   :extra-paths ["demo"]
-   :jvm-opts ["-Dmaven.wagon.rto=90000"]
-   :exec-fn modular.system/start!
-   :exec-args {:profile "jetty"
-               :config ["webly/config.edn" "goldly/config.edn"
-                        "demo/demo-config.edn"]
-               :services "goldly/services.edn"}}
+  ; demo ui
+  :webly {:exec-fn webly.app.app/webly-build
+          :extra-deps {org.pinkgorilla/webly {:mvn/version "0.5.661"}
+                       org.pinkgorilla/ui-repl {:mvn/version "0.1.94"}}
+          :extra-paths ["demo" "demo/resources"]
+          :exec-args {:config ["demo-config.edn"]
+                      :profile "npm-install"}}
 
-  ; BUILD BUNDLE (then exit)
-  :build
-  {:exec-fn goldly.app.build/goldly-build
-   :exec-args {:profile "compile2"}}
+  :npm-install {:exec-args {:profile "npm-install"}}
+  :compile {:exec-args {:profile "compile2"}}
+  :release {:exec-args {:profile "release"}}
+  :release-adv {:exec-args {:profile "release-adv"}}
+  :static {:exec-args {:profile "static"}}
+  :ci {:exec-args {:profile "ci"}}
+
+  :run {:exec-fn modular.system/start!
+        :extra-paths ["demo" "demo/resources"]
+        :exec-args {:profile "jetty"
+                    :config  ["demo-config.edn"]
+                    :services "demo-services.edn"}}
 
 ;
   }}

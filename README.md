@@ -4,7 +4,8 @@
 ## Demo
 
 ```
-clojure -X:docs
+clj -X:webly:npm-install
+clj -X:webly:compile
 ```
 
 Navigate your webbrowser to port 8080. 
