@@ -33,7 +33,7 @@
 (def center [51.505, -0.09])
 
 ^:R
-['ui.leaflet/leaflet
+['ui.leaflet/leaflet-map
  {:box :lg
   :center [51.49, -0.08]
   :zoom 12

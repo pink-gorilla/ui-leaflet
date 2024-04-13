@@ -2,7 +2,7 @@
   (:require
    [reagent.core :as r]
    [input :refer [button select]]
-   [ui.leaflet :refer [leaflet]]))
+   [ui.leaflet :refer [leaflet-map]]))
 
 (def places
   {:london {:center [51.49, -0.08]
@@ -41,7 +41,7 @@
     [button {:on-click lucky} "Feeling Lucky!"]]
    [:p (str "map data: " (:map @holiday-state))]
    (when (:map @holiday-state)
-     [leaflet (:map @holiday-state)])])
+     [leaflet-map (:map @holiday-state)])])
 
 ^:R
 [holiday]
