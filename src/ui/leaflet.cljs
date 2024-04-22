@@ -137,13 +137,13 @@
             ]
 
         (if (= current-props @props)
-           [:> MapContainer (-> (apply-box-style spec)
-                                (merge container-props))
-            [:> TileLayer
-             {:url tile-layer-url
-              :attribution attribution}]
-            [:> Marker {:position center}]
-            (into  [:<>] (map feature features))]
+          [:> MapContainer (-> (apply-box-style spec)
+                               (merge container-props))
+           [:> TileLayer
+            {:url tile-layer-url
+             :attribution attribution}]
+           [:> Marker {:position center}]
+           (into  [:<>] (map feature features))]
           (do (reset! props current-props) ; https://react-leaflet.js.org/docs/api-components a containe is immuteable
               [:div "loading"]))))))
 
